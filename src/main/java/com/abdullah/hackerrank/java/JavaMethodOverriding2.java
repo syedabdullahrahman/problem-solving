@@ -27,7 +27,7 @@ class MotorCycle extends BiCycle{
 
 }
 
-class Solution{
+public class JavaMethodOverriding2 {
     public static void main(String []args){
         MotorCycle M=new MotorCycle();
     }
