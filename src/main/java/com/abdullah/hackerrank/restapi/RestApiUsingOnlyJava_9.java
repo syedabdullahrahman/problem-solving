@@ -22,12 +22,12 @@ import java.util.stream.Collectors;
  */
 
 public class RestApiUsingOnlyJava_9 {
-    private final static HttpClient httpClientSynchronous = HttpClient.newBuilder()
+    private static final HttpClient httpClientSynchronous = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_1_1)
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
-    private final static HttpClient httpClientAsynchronous = HttpClient.newBuilder()
+    private static final  HttpClient httpClientAsynchronous = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
             .connectTimeout(Duration.ofSeconds(10))
             .build();
@@ -53,13 +53,7 @@ public class RestApiUsingOnlyJava_9 {
                 new URI("https://httpbin.org/get?name=mkyong3"));
 
         List<CompletableFuture<String>> result = targets.stream()
-                .map(url -> httpClientSynchronous.sendAsync(
-                        HttpRequest.newBuilder(url)
-                                .GET()
-                                .setHeader("User-Agent", "Java 11 HttpClient Bot")
-                                .build(),
-                        HttpResponse.BodyHandlers.ofString())
-                        .thenApply(response -> response.body()))
+                .map(RestApiUsingOnlyJava_9::apply)
                 .collect(Collectors.toList());
 
         for (CompletableFuture<String> future : result) {
@@ -96,5 +90,15 @@ public class RestApiUsingOnlyJava_9 {
 
         // print response body
         System.out.println(response.body());
+    }
+
+    private static CompletableFuture<String> apply(URI url) {
+        return httpClientSynchronous.sendAsync(
+                HttpRequest.newBuilder(url)
+                        .GET()
+                        .setHeader("User-Agent", "Java 11 HttpClient Bot")
+                        .build(),
+                HttpResponse.BodyHandlers.ofString())
+                .thenApply(response -> response.body());
     }
 }
