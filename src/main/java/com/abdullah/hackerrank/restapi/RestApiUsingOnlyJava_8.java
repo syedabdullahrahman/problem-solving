@@ -17,6 +17,8 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 class ParameterStringBuilder {
     public static String getParamsString(Map<String, String> params)
@@ -38,7 +40,7 @@ class ParameterStringBuilder {
 }
 
 class Solution {
-
+    static Logger logger = Logger.getLogger(String.valueOf(Solution.class));
     /*
      * Complete the 'getTotalGoals' function below.
      *
@@ -52,7 +54,6 @@ class Solution {
         HttpURLConnection conn = null;
         BufferedReader br = null;
         try {
-
             String baseURL = "https://jsonmock.hackerrank.com/api/football_matches?";
 
             Integer pageNumber = 1;
@@ -96,7 +97,7 @@ class Solution {
             while ((inputLine = br.readLine()) != null) {
                 content.append(inputLine);
             }
-            JSONUtil.JSONObject jsonObject = new JSONUtil.JSONObject(content.toString());
+            JSONObject jsonObject = new JSONObject(content.toString());
 
             System.out.println(jsonObject);
 

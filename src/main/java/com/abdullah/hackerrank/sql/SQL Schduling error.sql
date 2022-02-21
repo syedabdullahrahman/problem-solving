@@ -1,0 +1,15 @@
+SET NOCOUNT ON;
+
+
+/*
+Enter your query here.
+Please append a semicolon ";" at the end of the query
+*/
+
+SELECT DISTINCT P.NAME, C.NAME
+FROM SCHEDULE S
+INNER JOIN COURSE C ON S.COURSE_ID = C.ID
+INNER JOIN PROFESSOR P ON S.PROFESSOR_ID = P.ID
+WHERE P.DEPARTMENT_ID <> C.DEPARTMENT_ID;
+
+go
