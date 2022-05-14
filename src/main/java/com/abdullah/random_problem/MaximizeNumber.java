@@ -1,4 +1,4 @@
-package com.abdullah.turing;
+package com.abdullah.random_problem;
 
 /**
  * User: Syed Abdullah
