@@ -20,4 +20,7 @@ public class P_53_Maximum_Subarray {
         }
         return max_sum;
     }
+    static public void test(String args[]){
+
+    }
 }

@@ -2,6 +2,7 @@ package com.abdullah.leetcode;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * User: Syed Abdullah
@@ -14,13 +15,26 @@ public class P_315_Count_of_Smaller_Numbers_After_Self {
         int leftCount;
         int selfCount;
         Node right, left;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node node = (Node) o;
+            return val == node.val && leftCount == node.leftCount && selfCount == node.selfCount && Objects.equals(right, node.right) && Objects.equals(left, node.left);
+        }
+
         Node(int val){
             this.val = val;
             this.leftCount = 0;
             this.selfCount = 1;
             right = left = null;
         }
+        public static void sample(){
+
+        }
     }
+
     public List<Integer> countSmaller(int[] nums) {
         Node root = new Node(nums[nums.length-1]);
         List<Integer> result = new LinkedList<>();
@@ -51,8 +65,5 @@ public class P_315_Count_of_Smaller_Numbers_After_Self {
                 return node.selfCount+ node.leftCount + insert(node.right,num);
             }
         }
-    }
-
-    public static void main(String[] args) {
     }
 }
